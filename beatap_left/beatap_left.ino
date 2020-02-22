@@ -78,7 +78,6 @@ void loop() {
     oya_count = 0;
     Keyboard.release('y');
   }
-  }
 
 
   
