@@ -3,77 +3,58 @@
 void setup() {
   // put your setup code here, to run once:
   Keyboard.begin();
-  //pinMode(6, INPUT);
- // pinMode(4, INPUT);
   Serial.begin(9600);
 }
 
 
 void loop() {
-  static bool hoge = false, huga = false, a = false, b = false;
-  // put your main code here, to run repeatedly:
-  static int num = 0, moke = 0;
-  float out7 = analogRead(A7);
-  float out6 = analogRead(A6);
-  //float out = digitalRead(A7);
-  if(out7 > 50){
-    hoge = true;
-    //num--;
+  static bool ko_flag = false, kusuri_flag = false, oya_flag = false, hitosasi_flag = false, naka_flag = false;
+  float koyubi = analogRead(A3);
+  float kusuriyubi = analogRead(A0);
+  float oyayubi = analogRead(A7);
+  float hitosasiyubi = analogRead(A9);
+  float nakayubi = analogRead(A10);
+
+  if(ko_flag == false && koyubi > 100){
+     ko_flag = true;
+     Keyboard.press('q');
+  }else if(ko_flag == true && koyubi <= 100){
+    ko_flag = false;
+    Keyboard.release('q');
   }
 
-  if(out6 > 50){
-    a = true;
-    //num--;
+  if(kusuri_flag == false && kusuriyubi > 100){
+     kusuri_flag = true;
+     Keyboard.press('w');
+  }else if(kusuri_flag == true && kusuriyubi <= 100){
+    kusuri_flag = false;
+    Keyboard.release('w');
   }
+
+  if(naka_flag == false && nakayubi > 100){
+     naka_flag = true;
+     Keyboard.press('e');
+  }else if(naka_flag == true && nakayubi <= 100){
+    naka_flag = false;
+    Keyboard.release('e');
+  }
+
+  if(hitosasi_flag == false && hitosasiyubi > 100){
+     hitosasi_flag = true;
+     Keyboard.press('r');
+  }else if(hitosasi_flag == true && hitosasiyubi <= 100){
+    hitosasi_flag = false;
+    Keyboard.release('r');
+  }
+
+  if(oya_flag == false && oyayubi > 100){
+     oya_flag = true;
+     Keyboard.press('t');
+  }else if(oya_flag == true && oyayubi <= 100){
+    oya_flag = false;
+    Keyboard.release('t');
+  }
+
+
   
-  if (hoge){
-    huga = true;
-  }
-  if(a){
-    b = true;
-  }
-  if(num == 50){
-    Serial.println(huga);
-    if (huga){
-      Keyboard.print('1');
-    }
-    if (a){
-      Keyboard.print('2');
-    }
-    huga = false;
-    hoge = false;
-    num = 0;
-    moke = 0;
-    a = 0;
-    b = 0;
-  }/*else if(moke == 50){
-    Serial.println(huga ? 2 : 0);
-    //Keyboard.print('1');
-    huga = false;
-    hoge = false;
-    num = 0;
-    moke = 0;
-  }*/
- 
-  num++;
-  moke++;
-  //Serial.println(out);
 }
-
-
-/*
-void loop() {
-  // put your main code here, to run repeatedly:
-  static int num = 0, hoge = 1;
-  float out = digitalRead(A7);
-  if(num == 1000){
-    num = 0;
-    Serial.println(hoge);
-    hoge = 1;
-  }else{
-    num++;
-  }
-  if(out == 0){
-    hoge = 0;
-  }
-}*/
